@@ -12,11 +12,11 @@ using YoutubeApi.Domain.Common;
 
 namespace YoutubeApi.Persistence.Repositories
 {
-    public class ReadRepositories<T> : IReadRepository<T> where T : class, IEntityBase, new()
+    public class ReadRepository<T> : IReadRepository<T> where T : class, IEntityBase, new()
     {
         private readonly DbContext dbContext;
 
-        public ReadRepositories(DbContext dbContext)
+        public ReadRepository(DbContext dbContext)
         {
             this.dbContext = dbContext;
         }
