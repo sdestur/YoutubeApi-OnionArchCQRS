@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using YoutubeApi.Application.Interfaces.Repositories;
 using YoutubeApi.Persistence.Context;
 using YoutubeApi.Persistence.Repositories;
+using YoutubeApi.Persistence.UnitOfWorks;
 
 namespace YoutubeApi.Persistence
 {
@@ -19,8 +20,10 @@ namespace YoutubeApi.Persistence
             services.AddDbContext<AppDbContext>(opt =>
             opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepositories<>));
-            services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepositories<>));
+            services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
+            services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }
 }

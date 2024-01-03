@@ -9,11 +9,11 @@ using YoutubeApi.Domain.Common;
 
 namespace YoutubeApi.Persistence.Repositories
 {
-    public class WriteRepositories<T> : IWriteRepository<T> where T : class, IEntityBase, new()
+    public class WriteRepository<T> : IWriteRepository<T> where T : class, IEntityBase, new()
     {
         private readonly DbContext dbContext;
 
-        public WriteRepositories(DbContext dbContext)
+        public WriteRepository(DbContext dbContext)
         {
             this.dbContext = dbContext;
         }
