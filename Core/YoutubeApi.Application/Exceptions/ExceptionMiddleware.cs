@@ -40,7 +40,6 @@ namespace YoutubeApi.Application.Exceptions
 			List<string> errors = new()
 			{
 				$"Hata Mesaji : {exception.Message}",
-				$"Mesaj Açıklaması : {exception.InnerException?.ToString()}"
 			};
 
 			return httpContext.Response.WriteAsync(new ExceptionModel
