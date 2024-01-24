@@ -13,7 +13,7 @@ namespace YoutubeApi.Application.Interfaces.Tokens
     {
         Task<JwtSecurityToken> CreateToken(User user, IList<string> roles);
         string GenerateRefreshToken();
-        ClaimsPrincipal? GetPrincipalFromExpiredToken();
+        ClaimsPrincipal? GetPrincipalFromExpiredToken(string? token);
 
     }
 }

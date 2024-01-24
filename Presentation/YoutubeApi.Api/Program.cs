@@ -3,6 +3,7 @@ using YoutubeApi.Application;
 using YoutubeApi.Infrastructure;
 using YoutubeApi.Mapper;
 using YoutubeApi.Application.Exceptions;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,34 @@ builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 builder.Services.AddCustomMapper();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Youtube API", Version = "v1" , Description = "Youtube API swagger client" });
+    c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme()
+    {
+        Name = "Authorization",
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT" ,
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Description = "'Bearer' yazýp boþluk býraktýktan sonra Token'ý girebilirsiniz. \r\n\r\n Örneðin : \"Bearer eyhDFHWsdhERagHWrgfSDGFWEagFdfe\""
+        
+    });
+    c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement()
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+});
 
 var app = builder.Build();
 
