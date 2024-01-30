@@ -5,10 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YoutubeApi.Application.Interfaces.AutoMapper;
+using IMapper = AutoMapper.IMapper;
+
 
 namespace YoutubeApi.Mapper.AutoMapper
 {
-    public class Mapper : YoutubeApi.Application.Interfaces.AutoMapper.IMapper
+    public class Mapper : Application.Interfaces.AutoMapper.IMapper
     {
         public static List<TypePair> typePairs = new();
         private IMapper MapperContainer;
@@ -28,7 +31,7 @@ namespace YoutubeApi.Mapper.AutoMapper
 
         public TDestination Map<TDestination>(object source, string? ignore = null)
         {
-            Config<TDestination,object>(5, ignore);
+            Config<TDestination, object>(5, ignore);
 
             return MapperContainer.Map<TDestination>(source);
         }
@@ -42,8 +45,8 @@ namespace YoutubeApi.Mapper.AutoMapper
 
         protected void Config<TDestination, TSource>(int depth, string? ignore = null)
         {
-            var typePair =new TypePair(typeof(TSource), typeof(TDestination));
-            if (typePairs.Any(a => a.DestinationType == typePair.DestinationType && a.SourceType == typePair.SourceType && ignore is null))
+            var typePair = new TypePair(typeof(TSource), typeof(TDestination));
+            if (typePairs.Any(a => a.DestinationType == typePair.DestinationType && a.SourceType == typePair.SourceType) && ignore is null)
                 return;
 
             typePairs.Add(typePair);
@@ -53,7 +56,7 @@ namespace YoutubeApi.Mapper.AutoMapper
                 foreach (var pair in typePairs)
                 {
                     if (ignore is not null)
-                        cfg.CreateMap(pair.SourceType, pair.DestinationType).MaxDepth(depth).ForMember(ignore , x=>x.Ignore()).ReverseMap();
+                        cfg.CreateMap(pair.SourceType, pair.DestinationType).MaxDepth(depth).ForMember(ignore, x => x.Ignore()).ReverseMap();
                     else
                         cfg.CreateMap(pair.SourceType, pair.DestinationType).MaxDepth(depth).ReverseMap();
                 }
