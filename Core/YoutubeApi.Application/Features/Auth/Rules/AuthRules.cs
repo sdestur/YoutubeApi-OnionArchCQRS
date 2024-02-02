@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,14 @@ namespace YoutubeApi.Application.Features.Auth.Rules
         {
             if (user is not null) throw new UserAlreadyExistException();
             return Task.CompletedTask;
+        }
+
+        public Task EmailOrPasswordShouldNotBeIncalid(User? user, bool checkPassword)
+        {
+            if (user is null || !checkPassword) throw new EmailOrPasswordShouldNotBeIncalid();
+            return Task.CompletedTask;
+
+
         }
     }
 }
