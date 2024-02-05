@@ -39,7 +39,7 @@ namespace YoutubeApi.Application.Features.Auth.Command.Login
             User user = await userManager.FindByEmailAsync(request.Email);
             bool chechPassword = await userManager.CheckPasswordAsync(user, request.Password);
 
-            await authRules.EmailOrPasswordShouldNotBeIncalid(user, chechPassword);
+            await authRules.EmailOrPasswordShouldNotBeInValid(user, chechPassword);
 
             IList<string> roles = await userManager.GetRolesAsync(user);
 

@@ -2,9 +2,9 @@
 
 namespace YoutubeApi.Application.Features.Auth.Exceptions
 {
-    public class EmailOrPasswordShouldNotBeIncalid : BaseException
+    public class EmailOrPasswordShouldNotBeInValid : BaseException
     {
-        public EmailOrPasswordShouldNotBeIncalid() : base("Kullanıcı adı veya şifre yanlıştır.!") { }
+        public EmailOrPasswordShouldNotBeInValid() : base("Kullanıcı adı veya şifre yanlıştır.!") { }
 
     }
 
