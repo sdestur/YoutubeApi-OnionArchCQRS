@@ -18,9 +18,9 @@ namespace YoutubeApi.Application.Features.Auth.Rules
             return Task.CompletedTask;
         }
 
-        public Task EmailOrPasswordShouldNotBeIncalid(User? user, bool checkPassword)
+        public Task EmailOrPasswordShouldNotBeInValid(User? user, bool checkPassword)
         {
-            if (user is null || !checkPassword) throw new EmailOrPasswordShouldNotBeIncalid();
+            if (user is null || !checkPassword) throw new EmailOrPasswordShouldNotBeInValid();
             return Task.CompletedTask;
         }
 
@@ -30,6 +30,12 @@ namespace YoutubeApi.Application.Features.Auth.Rules
             {
                 throw new RefreshTokenSouldNotBeExpiredException();
             }
+            return Task.CompletedTask;
+        }
+
+        public Task EmailAddressShouldBeValid(User? user)
+        {
+            if (user is null) throw new EmailAddressShouldBeValidException();
             return Task.CompletedTask;
         }
     }
