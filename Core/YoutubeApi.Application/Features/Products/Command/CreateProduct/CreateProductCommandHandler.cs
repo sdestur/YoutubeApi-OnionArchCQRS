@@ -24,6 +24,7 @@ namespace YoutubeApi.Application.Features.Products.Command.CreateProduct
         public async Task<Unit> Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
         {
             IList<Product> products = await unitOfWork.GetReadRepository<Product>().GetAllAsync();
+             
 
             await productRules.ProductTitleMustBeSame(products,request.Title);
 
