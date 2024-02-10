@@ -32,7 +32,7 @@ namespace YoutubeApi.Infrastructure.RedisCache
             return default;
         }
 
-        public async Task<T> SetAsync<T>(string key, T value, DateTime? expirationTime = null)
+        public async Task SetAsync<T>(string key, T value, DateTime? expirationTime = null)
         {
             //DateTime to TimeSpan convert
             TimeSpan timeUnitExpiration = expirationTime.Value - DateTime.Now;
